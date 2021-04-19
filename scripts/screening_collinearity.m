@@ -1,4 +1,4 @@
-table = readtable('basededatos.xlsx','Range','A1:W119');
+table = readtable('municipal_waste_data.xlsx','Range','A1:W119');
 
 ln_y = table{:,23};
 ln_pop = table{:,3};
