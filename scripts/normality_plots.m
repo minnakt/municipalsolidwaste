@@ -20,34 +20,16 @@ ln_hgs = table{:,15};     %x6
 ln_ces = table{:,17};     %x7
 ln_dpi = table{:,20};     %x8
 
-%plot_vars(pop, pd, pbam, as, hgs, ces, dpi, mi, y)
-%plot_vars(ln_pop, ln_pd, ln_pbam, as, ln_hgs, ln_ces, ln_dpi, mi, ln_y)
-
-[~,p] = kstest(pop);
-[~,p] = kstest(pd);
-[~,p] = kstest(pbam);
-[~,p] = kstest(as);
-[~,p] = kstest(hgs);
-[~,p] = kstest(ces);
-[~,p] = kstest(ces)
-ind = ~isnan(ces);
-ces = ces(ind);
-mu = mean(ces)
-dev = std(ces)
-[h,p] = kstest2(ces, normrnd(mu, dev, [118, 1]))
-[~,p] = kstest(dpi);
-% [~,p] = kstest(mi)
-% ind = ~isnan(mi);
-% mi = mi(ind);
-% mu = mean(mi')
-% dev = std(mi)
-% [h,p] = kstest2(mi, normrnd(mu, dev, [118, 1]))
-[~,p] = kstest(y);
-
+% Look at the histogram to observe distributions
 % histogram(pop)
 % histogram(log(dpi), 'FaceColor', '#62ddee')
 % ylabel("Count");
 % xlabel("Value");
+% title("Histogram of ln(X_{dpi})")
+
+% Produce normality plots for the variables
+plot_vars(pop, pd, pbam, as, hgs, ces, dpi, mi, y)
+plot_vars(ln_pop, ln_pd, ln_pbam, as, ln_hgs, ln_ces, ln_dpi, mi, ln_y)
 
 function [] = plot_vars(x1, x2, x3, x4, x5, x6, x7, x8, y)
     figure;

@@ -11,36 +11,37 @@ ln_hgs = table{:,15};
 x_mi = table{:,21};
 ones_col = ones(118,1);
 
+% RUN VIF ITERATIONS
 all = [x_as,ln_dpi,ln_ces,ln_hgs,x_mi,ln_pop,ln_pd,ln_pbam];
 all(any(isnan(all), 2), :) = [];
 format long
 vif(all)
 
-%eliminate ln_dpi
+% eliminate ln_dpi
 all = [x_as,ln_ces,ln_hgs,x_mi,ln_pop,ln_pd,ln_pbam];
 all(any(isnan(all), 2), :) = [];
 format long
 vif(all)
 
-%eliminate ln_ces
+% eliminate ln_ces
 all = [x_as,ln_hgs,x_mi,ln_pop,ln_pd,ln_pbam];
 all(any(isnan(all), 2), :) = [];
 format long
 vif(all)
 
-%eliminate ln_hgs
+% eliminate ln_hgs
 all = [x_as,x_mi,ln_pop,ln_pd,ln_pbam];
 all(any(isnan(all), 2), :) = [];
 format long
 vif(all)
 
-%eliminate x_as
+% eliminate x_as
 all = [x_mi,ln_pop,ln_pd,ln_pbam];
 all(any(isnan(all), 2), :) = [];
 format long
 vif(all)
 
-%pearson coefficient
+% PEARSON CORRELATION COEFFICIENT
 X = [ln_y,ln_pop,ln_pd,ln_pbam];
 Y = [ln_pop,ln_pd,ln_pbam,x_mi];
 corr(Y,X,'Rows','pairwise')

@@ -1,4 +1,4 @@
-table = readtable('basededatos.xlsx','Range','A1:W119');
+table = readtable('municipal_waste_data.xlsx','Range','A1:W119');
 
 ln_y = table{:,23};
 ln_pop = table{:,3};
@@ -14,16 +14,17 @@ ln_pd = ln_pd(ind);
 
 ones_col = ones(111,1);
 
-%model 1, regress and anova
+% model 1: regress and anova
 md1 = fitlm([ln_pop,ln_pd,ln_pbam],ln_y)
 anova(md1,'summary')
 [p1,DW1] = dwtest(md1,'exact','both')
 
-%model 2, regress and anova
+% model 2: regress and anova
 md2 = fitlm([ln_pop,ln_pbam],ln_y)
 anova(md2,'summary')
 [p2,DW2] = dwtest(md2,'exact','both')
 
+% Graph model 2
 scatter3(ln_pop,ln_pbam,ln_y,'filled')
 hold on
 x1fit = min(ln_pop):0.2:max(ln_pop);
@@ -35,9 +36,3 @@ xlabel('Population')
 ylabel('Population Density')
 zlabel('Waste Generation')
 view(50,10)
-
-%testing normality probability plots for variables
-% x_hgs = table{:,14};
-% ln_hgs = table{:,15};
-% normplot(x_hgs)
-% normplot(ln_hgs)
